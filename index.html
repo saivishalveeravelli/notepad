@@ -1,0 +1,201 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Untitled - CodePad</title>
+  <link rel="stylesheet" href="j.css?v=normal-editor-1">
+  <script src="s.js?v=normal-editor-1" defer></script>
+</head>
+<body>
+  <div class="app" id="app">
+    <header class="titlebar">
+      <div class="title-left">
+        <span class="app-icon">▤</span>
+        <span id="windowTitle">Untitled - CodePad</span>
+      </div>
+      <button id="settingsBtn" class="settings-btn"
+        title="Settings" aria-label="Open settings"
+        aria-expanded="false" aria-controls="settingsPanel">
+        &#8943;
+      </button>
+    </header>
+
+    <nav class="menubar" aria-label="Main menu">
+      <div class="menu">
+        <button class="menu-trigger" aria-expanded="false">File</button>
+        <div class="dropdown">
+          <button data-action="new">New <kbd>Ctrl+N</kbd></button>
+          <button data-action="open">Open... <kbd>Ctrl+O</kbd></button>
+          <hr>
+          <button data-action="save">Save <kbd>Ctrl+S</kbd></button>
+          <button data-action="saveas">Save As...</button>
+          <hr>
+          <button data-action="print">Print <kbd>Ctrl+P</kbd></button>
+        </div>
+      </div>
+
+      <div class="menu">
+        <button class="menu-trigger" aria-expanded="false">Edit</button>
+        <div class="dropdown">
+          <button data-action="undo">Undo <kbd>Ctrl+Z</kbd></button>
+          <button data-action="redo">Redo <kbd>Ctrl+Y</kbd></button>
+          <hr>
+          <button data-action="cut">Cut <kbd>Ctrl+X</kbd></button>
+          <button data-action="copy">Copy <kbd>Ctrl+C</kbd></button>
+          <button data-action="paste">Paste <kbd>Ctrl+V</kbd></button>
+          <button data-action="delete">Delete <kbd>Del</kbd></button>
+          <hr>
+          <button data-action="find">Find <kbd>Ctrl+F</kbd></button>
+          <button data-action="replace">Replace <kbd>Ctrl+H</kbd></button>
+          <button data-action="goto">Go To <kbd>Ctrl+G</kbd></button>
+          <hr>
+          <button data-action="selectall">Select All <kbd>Ctrl+A</kbd></button>
+          <button data-action="datetime">Time/Date <kbd>F5</kbd></button>
+        </div>
+      </div>
+
+      <div class="menu">
+        <button class="menu-trigger" aria-expanded="false">Format</button>
+        <div class="dropdown">
+          <button data-action="wrap" id="wrapMenu">✓ Word Wrap</button>
+          <button data-action="font">Font...</button>
+        </div>
+      </div>
+
+      <div class="menu">
+        <button class="menu-trigger" aria-expanded="false">View</button>
+        <div class="dropdown">
+          <button data-action="zoomin">Zoom In</button>
+          <button data-action="zoomout">Zoom Out</button>
+          <button data-action="zoomreset">Restore Default Zoom</button>
+        </div>
+      </div>
+    </nav>
+
+    <main class="workspace">
+      <textarea id="editor" aria-label="Text editor"
+        spellcheck="false" autofocus></textarea>
+    </main>
+
+    <footer id="statusBar" class="statusbar">
+      <span id="position">Ln 1, Col 1</span>
+      <span id="characters">0 characters</span>
+      <span id="zoomLabel">100%</span>
+      <span id="lineEnding">Windows (CRLF)</span>
+      <span id="encoding">UTF-8</span>
+    </footer>
+
+    <!-- Three-dot settings panel -->
+    <aside id="settingsPanel" class="settings-panel" hidden>
+      <div class="settings-heading">
+        <strong>Settings</strong>
+        <button id="closeSettings" aria-label="Close settings">✕</button>
+      </div>
+
+      <div class="settings-row">
+        <label for="statusToggle">Show Status Bar</label>
+        <input id="statusToggle" type="checkbox" checked>
+      </div>
+
+      <div class="settings-row">
+        <label for="darkToggle">Dark Mode</label>
+        <input id="darkToggle" type="checkbox">
+      </div>
+
+      <hr>
+
+      <div class="settings-row">
+        <label for="soundToggle">Typing Sounds</label>
+        <input id="soundToggle" type="checkbox">
+      </div>
+
+      <div class="settings-field">
+        <label for="soundProfile">Keyboard Sound</label>
+        <select id="soundProfile">
+          <option value="creamy">Creamy Keyboard</option>
+          <option value="thock">Deep Thock</option>
+          <option value="typewriter">Vintage Typewriter</option>
+          <option value="whisper">Soft Whisper</option>
+          <option value="crystal">Crystal Click</option>
+          <option value="retro">Retro Computer</option>
+          <option value="wooden">Wooden Keyboard</option>
+          <option value="cyber">Cyber Keyboard</option>
+        </select>
+      </div>
+
+      <div class="settings-field">
+        <div class="settings-row">
+          <label for="soundVolume">Volume</label>
+          <span id="volumeLabel">30%</span>
+        </div>
+        <input id="soundVolume" type="range"
+          min="0" max="100" value="30">
+      </div>
+
+      <hr>
+      <button class="about-button" data-action="about">
+        About CodePad
+      </button>
+    </aside>
+  </div>
+
+  <input id="fileInput" type="file"
+    accept=".txt,.md,.js,.ts,.java,.py,.html,.css,.json,.xml,.csv,.log,text/*"
+    hidden>
+
+  <dialog id="findDialog">
+    <form id="findForm" class="dialog-content">
+      <h3>Find and Replace</h3>
+      <label for="findInput">Find what</label>
+      <input id="findInput" type="text">
+      <label for="replaceInput">Replace with</label>
+      <input id="replaceInput" type="text">
+      <label class="checkline">
+        <input id="matchCase" type="checkbox"> Match case
+      </label>
+      <div class="dialog-buttons">
+        <button type="submit">Find Next</button>
+        <button type="button" id="replaceBtn">Replace</button>
+        <button type="button" id="replaceAllBtn">Replace All</button>
+        <button type="button" class="close-dialog">Cancel</button>
+      </div>
+      <p id="findMessage" class="dialog-message"></p>
+    </form>
+  </dialog>
+
+  <dialog id="gotoDialog">
+    <div class="dialog-content">
+      <h3>Go To Line</h3>
+      <label for="gotoInput">Line number</label>
+      <input id="gotoInput" type="number" min="1" value="1">
+      <div class="dialog-buttons">
+        <button type="button" id="gotoBtn">Go To</button>
+        <button type="button" class="close-dialog">Cancel</button>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog id="fontDialog">
+    <div class="dialog-content">
+      <h3>Font</h3>
+      <label for="fontFamily">Font family</label>
+      <select id="fontFamily">
+        <option value="Consolas, monospace">Consolas</option>
+        <option value="'Courier New', monospace">Courier New</option>
+        <option value="Arial, sans-serif">Arial</option>
+        <option value="Georgia, serif">Georgia</option>
+      </select>
+      <label for="fontSize">Font size</label>
+      <input id="fontSize" type="number" min="8" max="48" value="15">
+      <div class="dialog-buttons">
+        <button type="button" id="applyFontBtn">Apply</button>
+        <button type="button" class="close-dialog">Cancel</button>
+      </div>
+    </div>
+  </dialog>
+
+
+</body>
+</html>

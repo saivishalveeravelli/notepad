@@ -1,0 +1,476 @@
+
+:root {
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  color: #111;
+  background: #fff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* ===== MAIN APPLICATION ===== */
+
+.app {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  height: 100dvh;
+  background: #fff;
+  color: #111;
+}
+
+/* ===== TITLE BAR ===== */
+
+.titlebar {
+  height: 34px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f2f2f2;
+  padding: 0 10px;
+  font-size: 12px;
+  user-select: none;
+}
+
+.title-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+#windowTitle {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.app-icon {
+  color: #176bb4;
+  font-size: 19px;
+}
+
+.settings-btn {
+  border: 0;
+  background: transparent;
+  color: inherit;
+  border-radius: 4px;
+  font-size: 24px;
+  line-height: 1;
+  padding: 2px 10px;
+}
+
+.settings-btn:hover {
+  background: #dedede;
+}
+
+/* ===== MENU BAR ===== */
+
+.menubar {
+  height: 30px;
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  background: #f8f8f8;
+  border-bottom: 1px solid #ddd;
+  padding: 0 4px;
+  position: relative;
+  z-index: 10;
+}
+
+.menu {
+  position: relative;
+}
+
+.menu-trigger {
+  background: transparent;
+  color: inherit;
+  border: 0;
+  padding: 6px 11px;
+  font-size: 13px;
+}
+
+.menu-trigger:hover,
+.menu.open > .menu-trigger {
+  background: #e5e5e5;
+}
+
+.dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 235px;
+  background: #fafafa;
+  border: 1px solid #c9c9c9;
+  box-shadow: 2px 4px 12px #0002;
+  padding: 5px;
+  z-index: 20;
+}
+
+.menu.open .dropdown {
+  display: block;
+}
+
+.dropdown button {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  color: inherit;
+  border: 0;
+  padding: 7px 12px;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.dropdown button:hover {
+  background: #dcecff;
+}
+
+.dropdown hr {
+  border: 0;
+  border-top: 1px solid #ddd;
+  margin: 4px 7px;
+}
+
+kbd {
+  font-family: inherit;
+  font-size: 11px;
+  color: #777;
+}
+
+/* ===== TEXT EDITOR ===== */
+
+.workspace {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+}
+
+#editor {
+  flex: 1;
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+  resize: none;
+  border: 0;
+  outline: 0;
+  padding: 7px 9px;
+  color: #111;
+  background: #fff;
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 15px;
+  line-height: 1.45;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  overflow: auto;
+  tab-size: 4;
+}
+
+/* ===== STATUS BAR ===== */
+
+.statusbar {
+  height: 25px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  overflow-x: auto;
+  border-top: 1px solid #ddd;
+  background: #f7f7f7;
+  font-size: 11px;
+  color: #555;
+}
+
+.statusbar span {
+  padding: 4px 13px;
+  border-left: 1px solid #ddd;
+  white-space: nowrap;
+}
+
+/* ===== SETTINGS PANEL ===== */
+
+.settings-panel {
+  position: absolute;
+  top: 39px;
+  right: 10px;
+  width: min(320px, calc(100vw - 20px));
+  max-height: calc(100dvh - 55px);
+  overflow-y: auto;
+  z-index: 100;
+  padding: 18px;
+  background: #fff;
+  color: #222;
+  border: 1px solid #ddd;
+  border-radius: 9px;
+  box-shadow: 0 12px 35px #0003;
+  font-size: 13px;
+}
+
+.settings-panel[hidden] {
+  display: none !important;
+}
+
+.settings-heading,
+.settings-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.settings-heading {
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+.settings-heading button {
+  border: 0;
+  background: transparent;
+  color: inherit;
+  padding: 4px 7px;
+}
+
+.settings-row {
+  margin-bottom: 14px;
+}
+
+.settings-field {
+  margin: 16px 0;
+}
+
+.settings-field > label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.settings-field select {
+  width: 100%;
+  padding: 9px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: #fff;
+  color: #222;
+}
+
+.settings-field input[type="range"] {
+  width: 100%;
+  accent-color: #4778c7;
+}
+
+.settings-panel input[type="checkbox"] {
+  width: 17px;
+  height: 17px;
+  accent-color: #4778c7;
+  cursor: pointer;
+}
+
+.settings-panel hr {
+  border: 0;
+  border-top: 1px solid #e5e5e5;
+  margin: 15px 0;
+}
+
+.about-button {
+  border: 0;
+  background: transparent;
+  color: inherit;
+  padding: 8px 0;
+}
+
+.about-button:hover {
+  text-decoration: underline;
+}
+
+/* ===== DIALOGS ===== */
+
+dialog {
+  width: min(420px, calc(100vw - 24px));
+  border: 1px solid #aaa;
+  border-radius: 5px;
+  padding: 0;
+  background: #f8f8f8;
+  color: #111;
+  box-shadow: 0 12px 35px #0004;
+}
+
+dialog::backdrop {
+  background: #0005;
+}
+
+.dialog-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 18px;
+}
+
+.dialog-content h3 {
+  margin: 0 0 8px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.dialog-content > input,
+.dialog-content > select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #aaa;
+  border-radius: 3px;
+}
+
+.dialog-content label {
+  font-size: 13px;
+}
+
+.checkline {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.dialog-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.dialog-buttons button {
+  padding: 7px 12px;
+  background: #fff;
+  border: 1px solid #aaa;
+  border-radius: 3px;
+}
+
+.dialog-buttons button:hover {
+  background: #e0edff;
+}
+
+.dialog-message {
+  min-height: 16px;
+  margin: 0;
+  font-size: 12px;
+  color: #a43a3a;
+}
+
+/* ===== DARK MODE ===== */
+
+.app.dark {
+  background: #1e1e1e;
+  color: #eee;
+}
+
+.dark .titlebar,
+.dark .menubar,
+.dark .statusbar {
+  background: #282828;
+  color: #ddd;
+  border-color: #444;
+}
+
+.dark .settings-btn:hover,
+.dark .menu-trigger:hover,
+.dark .menu.open > .menu-trigger {
+  background: #414141;
+}
+
+.dark .dropdown {
+  background: #303030;
+  border-color: #555;
+}
+
+.dark .dropdown button:hover {
+  background: #444;
+}
+
+.dark .dropdown hr {
+  border-color: #444;
+}
+
+.dark #editor {
+  background: #1e1e1e;
+  color: #eee;
+  caret-color: #fff;
+}
+
+.dark .statusbar span {
+  border-color: #444;
+}
+
+.dark .settings-panel {
+  background: #292929;
+  color: #eee;
+  border-color: #454545;
+}
+
+.dark .settings-field select {
+  background: #393939;
+  color: #eee;
+  border-color: #555;
+}
+
+.dark .settings-panel hr {
+  border-color: #444;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+@media (max-width: 650px) {
+  .statusbar {
+    justify-content: flex-start;
+  }
+
+  .dropdown {
+    min-width: 205px;
+  }
+}
+
+/* ===== PRINT STYLES ===== */
+
+@media print {
+  .titlebar,
+  .menubar,
+  .statusbar,
+  .settings-panel {
+    display: none !important;
+  }
+
+  .app,
+  .workspace {
+    height: auto;
+    display: block;
+  }
+
+  #editor {
+    display: none;
+  }
+
+  #printContent {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    font: 12pt monospace;
+    color: black;
+  }
+}
